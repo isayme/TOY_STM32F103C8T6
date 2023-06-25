@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>.\STM32F10x_StdPeriph\Driver\inc;.\STM32F10x_StdPeriph\CMSIS</IncludePath>
+              <IncludePath>.\STM32F10x_StdPeriph\Driver\inc;.\STM32F10x_StdPeriph\CMSIS;.\UserCommon\inc;.\Hardware\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -547,6 +547,29 @@
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\User\main.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>FreeRTOS</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Hardware</GroupName>
+          <Files>
+            <File>
+              <FileName>led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\src\led.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>UserCommon</GroupName>
+          <Files>
+            <File>
+              <FileName>delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\UserCommon\src\delay.c</FilePath>
             </File>
           </Files>
         </Group>
