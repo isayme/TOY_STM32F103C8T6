@@ -1,41 +1,25 @@
 #include "stm32f10x.h"
 #include <stdio.h>
+#include <math.h>
 #include "FreeRTOS.h"
 #include "task.h"
 #include "led.h"
 #include "delay.h"
 
-static void Task_Led_On(void *arg __attribute__((unused))) {
-
+static void Task_Breath_Led(void *arg __attribute__((unused))) {
     for (;;) {
-        if (Led_IsOff()) {
-					vTaskDelay(500);
-					Led_On();
-					vTaskDelay(500);
-				} else {
-					vTaskDelay(50);
-				}
-    }
-}
-
-static void Task_Led_Off(void *arg __attribute__((unused))) {
-    for (;;) {
-        if (Led_IsOn()) {
-					vTaskDelay(500);
-					Led_Off();
-					vTaskDelay(500);
-				} else {
-					vTaskDelay(50);
-				}
+        Led_On();
+        vTaskDelay(1000);
+        Led_Off();
+        vTaskDelay(1000);
     }
 }
 
 int main() {
-	// Delay_Configuration();
+    // Delay_Configuration();
 	Led_Configuration();
 	
-	xTaskCreate(Task_Led_Off, "ledOff", 32, NULL, tskIDLE_PRIORITY + 1, NULL);
-	xTaskCreate(Task_Led_On, "ledOn", 32, NULL, tskIDLE_PRIORITY + 1, NULL);
+	xTaskCreate(Task_Breath_Led, "BreathLed", 32, NULL, tskIDLE_PRIORITY + 1, NULL);
 	vTaskStartScheduler();
 	
 	while (1); // not run here
