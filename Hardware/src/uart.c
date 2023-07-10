@@ -43,6 +43,8 @@ void UART_Init(u32 bound)
     
     // 使能串口
     USART_Cmd(USART1, ENABLE);
+    
+    printf("uart1 enabled, bound: %d\r\n", bound);
 }
 
 /**
@@ -54,7 +56,7 @@ void USART1_IRQHandler(void) {
 
 void UART_SendData(uint8_t data) {
     USART_SendData(USART1, data);
-    while(!USART_GetFlagStatus(USART1, USART_FLAG_TXE));	
+    while(RESET == USART_GetFlagStatus(USART1, USART_FLAG_TXE));	
 }
 
 void UART_SendString(char* string)
@@ -69,6 +71,9 @@ void UART_SendString(char* string)
 // printf 重定向到串口1，需勾选 Use Micro Lib
 int fputc(int ch, FILE *f)
 {
-	UART_SendData(ch);
+	// UART_SendData(ch);
+    USART_SendData(USART1, (unsigned char) ch);
+    while (!(USART1->SR & USART_FLAG_TXE));
+    
 	return ch;
 }

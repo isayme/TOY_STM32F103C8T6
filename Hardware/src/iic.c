@@ -1,5 +1,8 @@
+#include <stdio.h>
+
 #include "stm32f10x.h"
 #include "iic.h"
+#include "uart.h"
 
 // 主机地址，用不到则随便写，无影响
 #define HOST_ADDR 0x88
@@ -34,6 +37,9 @@ void IIC_Configuration() {
 	I2C_Init(I2C1, &I2C_InitStructure);         //初始化I2C
     
     I2C_Cmd(I2C1, ENABLE);  //启用I2C
+    
+    UART_SendString("iic init, host addr");
+    printf("0x%02x, bus speed: %d\r\n", HOST_ADDR, BUS_SPEED);
 }
 
 

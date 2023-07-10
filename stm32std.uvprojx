@@ -593,11 +593,6 @@
               <FileType>1</FileType>
               <FilePath>.\uGUI\ugui.c</FilePath>
             </File>
-            <File>
-              <FileName>ugui.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\uGUI\ugui.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -624,11 +619,6 @@
           <GroupName>Hardware</GroupName>
           <Files>
             <File>
-              <FileName>led.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\src\led.c</FilePath>
-            </File>
-            <File>
               <FileName>iic.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Hardware\src\iic.c</FilePath>
@@ -647,6 +637,21 @@
               <FileName>uart.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Hardware\src\uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\src\spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\src\led.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_st7789v2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\src\lcd_st7789v2.c</FilePath>
             </File>
           </Files>
         </Group>

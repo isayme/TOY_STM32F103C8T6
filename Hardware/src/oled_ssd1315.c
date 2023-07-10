@@ -2,6 +2,7 @@
 
 #include "oled_ssd1315.h"
 #include "iic.h"
+#include "delay.h"
 
 #define WIDTH 128
 #define HEIGHT 64
@@ -57,12 +58,8 @@ void OLED_SSD1315_Clear() {
     OLED_SSD1315_Fill(0x00);
 }
 
-void sleep(uint32_t i) {
-    while(i--);
-}
-
 void OLED_SSD1315_Init() {
-    sleep(1000000);
+    Delay_Ms(100);
     OLED_SSD1315_WriteCmd(0xAE);//--display off
 	OLED_SSD1315_WriteCmd(0x00);//---set low column address
 	OLED_SSD1315_WriteCmd(0x10);//---set high column address
@@ -101,7 +98,7 @@ void OLED_SSD1315_Init() {
     OLED_SSD1315_Clear();
 }
 
-void PLED_SSD1315_UGUI_PSet(int16_t x, int16_t y, uint32_t color) {
+void PLED_SSD1315_UGUI_PSet(int16_t x, int16_t y, uint16_t color) {
     uint8_t value;
     
     if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT) {

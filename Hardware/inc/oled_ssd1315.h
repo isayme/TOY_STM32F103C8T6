@@ -17,6 +17,6 @@ void OLED_SSD1315_Clear(void);
 void OLED_SSD1315_WriteData(uint8_t data);
 void OLED_SSD1315_SetPos(uint8_t x, uint8_t y);
 
-void PLED_SSD1315_UGUI_PSet(int16_t x, int16_t y, uint32_t color);
+void PLED_SSD1315_UGUI_PSet(int16_t x, int16_t y, uint16_t color);
 
 #endif
