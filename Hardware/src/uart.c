@@ -39,7 +39,7 @@ void UART_Init(u32 bound)
     USART_Init(USART1, &USART_InitStruct);
 
     // 开启/关闭串口中断
-    USART_ITConfig(USART1, USART_IT_RXNE, DISABLE);
+    USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
     
     // 使能串口
     USART_Cmd(USART1, ENABLE);
@@ -47,16 +47,27 @@ void UART_Init(u32 bound)
     printf("uart1 enabled, bound: %d\r\n", bound);
 }
 
-/**
- * 串口中断函数，名称不可自定义
- */
-void USART1_IRQHandler(void) {
-    
-}
+
 
 void UART_SendData(uint8_t data) {
     USART_SendData(USART1, data);
     while(RESET == USART_GetFlagStatus(USART1, USART_FLAG_TXE));	
+}
+
+void UART_SendBuffer(char* string, unsigned short len) {
+    for (int i = 0; i < len; i++) {
+        UART_SendData(*string);
+        string++;
+    }
+}
+
+short UART_RecvBuffer(char* string, unsigned short len) {
+	if (USART_GetITStatus(USART1, USART_FLAG_RXNE)!=RESET){
+			*string = USART_ReceiveData( USART1 );
+			// USART_SendData(UART5,ucTemp);
+        return 1;
+	}
+    return 0;
 }
 
 void UART_SendString(char* string)

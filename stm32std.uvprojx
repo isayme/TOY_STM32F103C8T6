@@ -325,7 +325,7 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>0</uC99>
+            <uC99>1</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>3</v6Lang>
@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>.\STM32F10x_StdPeriph\Driver\inc;.\STM32F10x_StdPeriph\CMSIS;.\UserCommon\inc;.\Hardware\inc;.\FreeRTOS\Source\include;.\FreeRTOS\Source\portable\RVDS\ARM_CM3;.\uGUI</IncludePath>
+              <IncludePath>.\STM32F10x_StdPeriph\Driver\inc;.\STM32F10x_StdPeriph\CMSIS;.\UserCommon\inc;.\Hardware\inc;.\FreeRTOS\Source\include;.\FreeRTOS\Source\portable\RVDS\ARM_CM3;.\uGUI;.\LetterShell</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -592,6 +592,36 @@
               <FileName>ugui.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\uGUI\ugui.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>LetterShell</GroupName>
+          <Files>
+            <File>
+              <FileName>shell.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LetterShell\shell.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell_cmd_list.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LetterShell\shell_cmd_list.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell_companion.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LetterShell\shell_companion.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell_ext.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LetterShell\shell_ext.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LetterShell\shell_port.c</FilePath>
             </File>
           </Files>
         </Group>

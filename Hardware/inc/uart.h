@@ -13,5 +13,7 @@ void UART_Init(uint32_t bound);
 
 void UART_SendData(uint8_t data);
 void UART_SendString(char* string);
+void UART_SendBuffer(char* string, unsigned short len);
+short UART_RecvBuffer(char* string, unsigned short len);
 
 #endif

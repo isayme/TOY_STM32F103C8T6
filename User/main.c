@@ -10,6 +10,7 @@
 #include "ugui.h"
 #include "uart.h"
 #include "lcd_st7789v2.h"
+#include "shell_port.h"
 
 static UG_GUI oledGUI;
 
@@ -17,8 +18,6 @@ static UG_GUI lcdGUI;
 
 static void Task_Breath_Led(void *arg __attribute__((unused))) {
     uint16_t delay = 1000;
-    
-    UART_SendString("led breath task started\r\n");
     
     for (;;) {
         Led_On();
@@ -31,36 +30,39 @@ static void Task_Breath_Led(void *arg __attribute__((unused))) {
 /**
  * 初始化任务
  */
-static void Task_Init(void *arg __attribute__((unused))) {  
-    UART_Init(UART_BOUND_115200);
-    UART_SendString("os init task start\r\n");
-    
-    Led_Configuration();
-    
-    IIC_Configuration();
-    
-    Delay_Configuration();
+//static void Task_Init(void *arg __attribute__((unused))) {  
+//    
+//    UART_SendString("os init task start\r\n");
+//    
+//    Led_Configuration();
+//    
+//    IIC_Configuration();
+//    
+//    Delay_Configuration();
 
-    LCD_ST7789V2_Init();
-    UG_Init(&lcdGUI, LCD_ST7789V2_DrawPoint, 240, 320);
-    UG_FillScreen(C_BLACK);
-    UG_FontSelect(&FONT_6X8);
-    UG_PutString(23, 24, "Hello World!");
-    
-    OLED_SSD1315_Init();
-    UG_Init(&oledGUI, PLED_SSD1315_UGUI_PSet, 128, 64);
-    UG_FontSelect(&FONT_6X8);
-    
-    UG_PutString(23, 24, "Hello World!");
+////    LCD_ST7789V2_Init();
+////    UG_Init(&lcdGUI, LCD_ST7789V2_DrawPoint, 240, 320);
+////    UG_FillScreen(C_BLACK);
+////    UG_FontSelect(&FONT_6X8);
+////    UG_PutString(23, 24, "Hello World!");
+////    
+//    OLED_SSD1315_Init();
+//    UG_Init(&oledGUI, PLED_SSD1315_UGUI_PSet, 128, 64);
+//    UG_FontSelect(&FONT_6X8);
+//    
+//    UG_PutString(23, 24, "Hello World!");
+//    
+//    
+//   
+//    
+//    xTaskCreate(Task_Breath_Led, "BreathLed", 10, NULL, tskIDLE_PRIORITY + 2, NULL);
+//    UART_SendString("os started task BreathLed\r\n");
+//  
+//    // 任务完成，删除自身
+//    vTaskDelete(NULL);
 
-    xTaskCreate(Task_Breath_Led, "BreathLed", 50, NULL, tskIDLE_PRIORITY + 2, NULL);
-    UART_SendString("os started task BreathLed\r\n");
-  
-    // 任务完成，删除自身
-    vTaskDelete(NULL);
-
-    UART_SendString("os init task exit\r\n");
-}
+//    UART_SendString("os init task exit\r\n");
+//}
 
 void RCC_Configuration() {
     RCC_DeInit(); // 复位 RCC 寄存器
@@ -98,13 +100,33 @@ void RCC_Configuration() {
 int main() {
     RCC_Configuration();
     
+    UART_Init(UART_BOUND_115200);
+
+    UART_SendString("os init task start\r\n");
     
+    Led_Configuration();
     
+    IIC_Configuration();
     
+    Delay_Configuration();
+        
+    LCD_ST7789V2_Init();
+    UG_Init(&lcdGUI, LCD_ST7789V2_DrawPoint, 240, 320);
+    UG_FillScreen(C_BLACK);
+    UG_FontSelect(&FONT_6X8);
+    UG_PutString(23, 24, "Hello World!");
     
+    OLED_SSD1315_Init();
+    UG_Init(&oledGUI, PLED_SSD1315_UGUI_PSet, 128, 64);
+    UG_FontSelect(&FONT_6X8);
     
-    //xTaskCreate(Task_Breath_Led, "BreathLed", 10, NULL, tskIDLE_PRIORITY + 2, NULL);
-	xTaskCreate(Task_Init, "Init", 64, NULL, tskIDLE_PRIORITY + 1, NULL);
+    UG_PutString(23, 24, "Hello World!");
+
+
+    userShellInit();
+
+    xTaskCreate(Task_Breath_Led, "BreathLed", 10, NULL, tskIDLE_PRIORITY + 2, NULL);
+	//xTaskCreate(Task_Init, "Init", 20, NULL, tskIDLE_PRIORITY + 1, NULL);
    
 	vTaskStartScheduler();
 	
