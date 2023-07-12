@@ -16,8 +16,6 @@
 #include "shell.h"
 #include "stm32f10x.h"
 #include "uart.h"
-//#include "cevent.h"
-//#include "log.h"
 #include "ugui.h"
 
 #define SHELL_BUFFER_LEN 128
@@ -26,6 +24,17 @@ Shell shell;
 char shellBuffer[SHELL_BUFFER_LEN];
 
 static SemaphoreHandle_t shellMutex;
+
+void UG_ConsolePutChar(char ch) {
+    char buf[2] = {0};
+    buf[0] = ch;
+
+//    if (ch == '\r') {
+//        return;
+//    }
+    
+    UG_ConsolePutString(buf);
+}
 
 /**
  * @brief 用户shell写
@@ -38,6 +47,9 @@ static SemaphoreHandle_t shellMutex;
 short userShellWrite(char *data, unsigned short len)
 {
     UART_SendBuffer(data, len);
+    for (int i = 0; i < len; i++) {
+        UG_ConsolePutChar(*(data + i));
+    }
     return len;
 }
 
@@ -108,14 +120,13 @@ void userShellInit(void)
 void USART1_IRQHandler(void) {
    if (USART_GetITStatus(USART1, USART_IT_RXNE)!=RESET){
        uint8_t ch = USART_ReceiveData( USART1 );
-       
        shellHandler(&shell, ch);
-	} 
+	}
 }
 
 int tick(int i, char ch, char *str)
 {
-    printf("Hello, tick %d\r\n", xTaskGetTickCountFromISR());
+    shellPrint(shellGetCurrent(), "Hello, tick %d\r\n", xTaskGetTickCountFromISR());
     return 0;
 }
 

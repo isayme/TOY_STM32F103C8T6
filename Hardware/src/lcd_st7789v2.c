@@ -3,21 +3,6 @@
 #include "spi.h"
 #include "delay.h"
 
-
-/**
- * 显示器驱动芯片：ST7789V2
- */
-#define USE_HORIZONTAL 0  //设置横屏或者竖屏显示 0或1为竖屏 2或3为横屏
-
-
-#if USE_HORIZONTAL==0 || USE_HORIZONTAL==1
-#define LCD_W 240
-#define LCD_H 320
-#else
-#define LCD_W 320
-#define LCD_H 240
-#endif
-
 //-----------------LCD端口定义---------------- 
 // RES：复位
 #define LCD_RES_Clr()  GPIO_ResetBits(GPIOA,GPIO_Pin_1)

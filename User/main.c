@@ -111,18 +111,21 @@ int main() {
     Delay_Configuration();
         
     LCD_ST7789V2_Init();
-    UG_Init(&lcdGUI, LCD_ST7789V2_DrawPoint, 240, 320);
+    UG_Init(&lcdGUI, LCD_ST7789V2_DrawPoint, LCD_W, LCD_H);
     UG_FillScreen(C_BLACK);
     UG_FontSelect(&FONT_6X8);
-    UG_PutString(23, 24, "Hello World!");
+    UG_ConsoleSetArea(0, 0, LCD_W, LCD_H);
+    UG_ConsoleSetForecolor(C_WHITE);
+    UG_ConsoleSetBackcolor(C_BLACK);
     
-    OLED_SSD1315_Init();
-    UG_Init(&oledGUI, PLED_SSD1315_UGUI_PSet, 128, 64);
-    UG_FontSelect(&FONT_6X8);
+//    OLED_SSD1315_Init();
+//    UG_Init(&oledGUI, PLED_SSD1315_UGUI_PSet, 128, 64);
+//    UG_FontSelect(&FONT_6X8);
+//    
+//    UG_PutString(23, 24, "Hello World!");
+
+  
     
-    UG_PutString(23, 24, "Hello World!");
-
-
     userShellInit();
 
     xTaskCreate(Task_Breath_Led, "BreathLed", 10, NULL, tskIDLE_PRIORITY + 2, NULL);
